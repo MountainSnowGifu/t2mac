@@ -1,0 +1,69 @@
+#0
+t2 ubuntu 起動DISC作成
+mac os を最新の一つ前まであげる
+起動セキュリティをOFFにする
+
+カーネルの起動ログ
+sudo dmesg
+
+
+#1
+firefox install
+
+sudo snap install firefox
+
+#2
+WIFIデバイスドライバインストール
+https://github.com/AdityaGarg8/Apple-Firmware
+
+curl -s --compressed "https://adityagarg8.github.io/t2-ubuntu-repo/KEY.gpg" | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/t2-ubuntu-repo.gpg >/dev/null
+echo "deb [signed-by=/etc/apt/trusted.gpg.d/t2-ubuntu-repo.gpg] https://github.com/AdityaGarg8/Apple-Firmware/releases/download/debian ./" | sudo tee -a /etc/apt/sources.list.d/t2.list
+sudo apt update
+
+sudo apt install apple-firmware
+
+#3
+t2linux kernel update
+https://github.com/t2linux/T2-Debian-and-Ubuntu-Kernel
+
+sudo apt install linux-t2-lts
+sudo apt remove linux-headers-$(uname -r) linux-image-$(uname -r)
+
+#4
+amdgpu-install
+https://rocm.docs.amd.com/projects/install-on-linux/en/latest/install/amdgpu-install.html
+
+sudo apt update
+wget https://repo.radeon.com/amdgpu-install/6.2.2/ubuntu/jammy/amdgpu-install_6.2.60202-1_all.deb
+
+sudo apt install ./amdgpu-install_6.2.60202-1_all.deb
+
+sudo amdgpu-install
+
+GPU-CHECK
+sudo apt install radeontop
+sudo radeontop
+
+#5
+Touch Bar の設定
+https://wiki.t2linux.org/guides/postinstall/
+sudo apt install tiny-dfr
+reboot
+sudo touchbar
+
+#5
+Ubuntu20.04の日本語化
+https://qiita.com/yamagarsan/items/563a844993d32460bd51
+
+日本語入力設定
+https://www.maclab.tokyo/document/ubuntu-keyboard/7393/
+MacにUbuntuをインストール　Mac用にキーボードを設定
+
+Ubuntuで「Ctrl」と「Caps Lock」を入れ替える方法
+https://engrmemo.jp/linux/ubuntu-keyboard-ctrl-capslock/
+
+sudo apt install gnome-tweaks
+gnome-tweaks
+
+
+
